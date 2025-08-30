@@ -1,7 +1,7 @@
 services:
   - type: web
-    name: kairos-calculator
+    name: kairos-calc1
     env: python
     plan: free
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn app:app"
+    startCommand: "gunicorn -b 0.0.0.0:$PORT app:app"

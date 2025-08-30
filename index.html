@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kairos Artifact Calculator</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>𐌊 KAIROS – Artifact Calculator</h1>
+    </header>
+    <main>
+        <form method="POST">
+            <h2>Artifact Dimensions</h2>
+            <label>Top Length (mm): <input type="number" name="length" required></label>
+            <label>Top Width (mm): <input type="number" name="width" required></label>
+            <label>Top Thickness (mm): <input type="number" name="thickness" required></label>
+            
+            <h2>Legs</h2>
+            <label>Number of Legs: <input type="number" name="legs" required></label>
+            <label>Leg Width (mm): <input type="number" name="leg_w" required></label>
+            <label>Leg Height (mm): <input type="number" name="leg_h" required></label>
+            <label>Leg Thickness (mm): <input type="number" name="leg_t" required></label>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        {% if result %}
+        <section class="results">
+            {% if result.error %}
+                <p class="error">{{ result.error }}</p>
+            {% else %}
+                <h2>Results</h2>
+                <ul>
+                    <li><b>Total Volume:</b> {{ result.total_vol }} m³</li>
+                    <li><b>Premix Mass:</b> {{ result.premix_mass }} kg ({{ result.bags }} bags)</li>
+                    <li><b>Premix Cost:</b> ${{ result.premix_cost }}</li>
+                    <li><b>Fibres:</b> {{ result.fibres_kg }} kg — ${{ result.fibres_cost }}</li>
+                    <li><b>Oxide:</b> {{ result.oxide_kg }} kg — ${{ result.oxide_cost }}</li>
+                    <li><b>Resin:</b> ${{ result.resin_cost }}</li>
+                    <li><b>Packaging:</b> ${{ result.packaging_cost }}</li>
+                    <li><b>Plaque:</b> ${{ result.plaque_cost }}</li>
+                    <li><b>Total Cost:</b> ${{ result.total_cost }}</li>
+                    <li><b>Est. Final Weight:</b> {{ result.final_weight }} kg</li>
+                </ul>
+            {% endif %}
+        </section>
+        {% endif %}
+    </main>
+</body>
+</html>
